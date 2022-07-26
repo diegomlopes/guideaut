@@ -6,7 +6,7 @@ autistic people. GuideAut contains collaborative system properties,
 design recommendations for graphical interfaces that make applications 
 more attractive to such an audience, as well as specific characteristics 
 of autistic profiles to help generate empathy between autistics and the 
-development team, through the use of of ProAut artifacts
+development team, through the use of of ProAut artifacts.
 
 ## Getting Started
 
