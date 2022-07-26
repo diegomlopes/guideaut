@@ -1,6 +1,12 @@
-# guideaut
+# GuideAut
 
-A new Flutter project.
+This repository contains the source code of GuideAut. GuideAut was conceived to provide technological support to ProAut, 
+a process to support the development of application interfaces for 
+autistic people. GuideAut contains collaborative system properties, 
+design recommendations for graphical interfaces that make applications 
+more attractive to such an audience, as well as specific characteristics 
+of autistic profiles to help generate empathy between autistics and the 
+development team, through the use of of ProAut artifacts
 
 ## Getting Started
 
