@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^2.3.2
   footer: ^0.0.4
   responsive_ui: ^3.0.0
+  flutter_auto_form: ^0.4.3
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,8 @@ flutter:
     - assets/images/app_icon_white.png
     - assets/images/banner.jpeg
     - assets/images/banner_home.png
+    - assets/images/banner_login.png
+    - assets/images/banner_top.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

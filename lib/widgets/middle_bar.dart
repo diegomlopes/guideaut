@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/theme.dart';
 
@@ -23,7 +22,7 @@ class MiddleBar extends StatelessWidget {
                       
                       TextButton(
                         onPressed: () =>
-                            Navigator.pushNamed(context, Routes.contact),
+                            Navigator.pushNamed(context, Routes.signin),
                         style: middleButtonStyle,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
