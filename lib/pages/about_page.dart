@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
+import 'package:guideaut/widgets/middle_bar.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -14,7 +16,9 @@ class _AboutPageState extends State<AboutPage> {
     return Scaffold(
       body: Column(
         children: const <Widget>[
-          MenuBar()
+          MiddleBar(),
+          MenuTopBar(),
+          Footer(),
         ],
       ),
     );

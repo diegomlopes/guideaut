@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.5 <3.0.0"
+  sdk: ">=2.14.2 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,13 +33,19 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  responsive_framework: ^0.2.0
-  animations: ^2.0.2
-  google_fonts: ^2.3.2
-  footer: ^0.0.4
-  responsive_ui: ^3.0.0
-  flutter_auto_form: ^0.4.3
+  cupertino_icons: 
+  responsive_framework: 
+  animations: 
+  google_fonts: ^4.0.3
+  footer: 
+  responsive_ui: 
+  flutter_auto_form: 
+  firebase_auth: 
+  firebase_core: 
+  cloud_firestore: 
+  dartz: 
+  firebase_storage: 
+  image_picker_for_web:
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +72,26 @@ flutter:
     - assets/images/banner_home.png
     - assets/images/banner_login.png
     - assets/images/banner_top.jpeg
+    - assets/images/proaut_flow.png
+    - assets/images/immersion_phase.png
+    - assets/images/immersion_phase_steps.png
+    - assets/images/immersion_phase_learn_context.png
+    - assets/images/immersion_phase_example_register.png
+    - assets/images/immersion_phase_elicit_requisits.png
+    - assets/images/immersion_phase_interview.png
+    - assets/images/immersion_phase_interview_caregivers.png
+    - assets/images/immersion_phase_interview_therapist.png
+    - assets/images/immersion_phase_autistic_view.png
+    - assets/images/immersion_phase_consolidate_data.png
+    - assets/images/immersion_phase_client_canvas.png
+    - assets/images/immersion_phase_caregivers_canvas.png
+    - assets/images/immersion_phase_therapist_canvas.png
+    - assets/images/analysis_phase_overview.png
+    - assets/images/analysis_phase_requisits.png
+    - assets/images/analysis_phase_personaut.png
+    - assets/images/analysis_phase_canvas_empathyaut.png
+    - assets/images/ideation_phase_overview.png
+    - assets/images/ideation_phase_trr.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

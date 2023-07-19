@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guideaut/features/signin/presentation/form_sign_in.dart';
+import 'package:guideaut/features/auth/presentation/form_sign_in.dart';
 import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 
@@ -17,7 +17,7 @@ class _SignInPageState extends State<SignInPage> {
       body: SingleChildScrollView(
         child: Column(
           children: const <Widget>[
-            MenuBar(),
+            MenuTopBar(),
             FormSignIn(),
             Footer(),
           ],

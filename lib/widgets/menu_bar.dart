@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/theme.dart';
 
-class MenuBar extends StatelessWidget {
-  const MenuBar({Key? key}) : super(key: key);
+class MenuTopBar extends StatelessWidget {
+  const MenuTopBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,12 @@ class MenuBar extends StatelessWidget {
                     ),
                   ),
                   Text("GUIDEAUT",
-                    style: GoogleFonts.montserrat(
-                      color: textPrimary,
-                      fontSize: 30,
-                      letterSpacing: 3,
-                      fontWeight: FontWeight.w500,
-                    )
-                  ),
+                      style: GoogleFonts.montserrat(
+                        color: textPrimary,
+                        fontSize: 30,
+                        letterSpacing: 3,
+                        fontWeight: FontWeight.w500,
+                      )),
                 ],
               ),
             ),
@@ -45,8 +44,8 @@ class MenuBar extends StatelessWidget {
                 child: Wrap(
                   children: <Widget>[
                     TextButton(
-                      onPressed: () => Navigator.popUntil(context,
-                          ModalRoute.withName(Navigator.defaultRouteName)),
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Routes.home),
                       style: menuButtonStyle,
                       child: const Text(
                         "HOME",
@@ -54,7 +53,7 @@ class MenuBar extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () =>
-                          Navigator.pushNamed(context, Routes.proaut),
+                          Navigator.pushNamed(context, Routes.tutorial),
                       style: menuButtonStyle,
                       child: const Text(
                         "PROAUT",

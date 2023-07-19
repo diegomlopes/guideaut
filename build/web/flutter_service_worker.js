@@ -2,35 +2,64 @@
 const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
-const RESOURCES = {
-  "version.json": "f3269dae715d47a086da596130492a76",
-"index.html": "3c759a938cc4cce1b4a02d74b4d26173",
-"/": "3c759a938cc4cce1b4a02d74b4d26173",
-"main.dart.js": "b81459452b906bcbbd1c0d627ab5b461",
+
+const RESOURCES = {"version.json": "f3269dae715d47a086da596130492a76",
+"index.html": "dbe5181e5fa7957cc20eb80058852edb",
+"/": "dbe5181e5fa7957cc20eb80058852edb",
+"main.dart.js": "b6e845c8eba4ff81aa37e5a52fc14cf7",
+"flutter.js": "6fef97aeca90b426343ba6c5c9dc5d4a",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "503aaa5f2512498994849faf7f25320f",
-"assets/AssetManifest.json": "03537295096e4386cf16d78b59efb9eb",
-"assets/NOTICES": "91cf0eeb54bc481fcfed120f9119ef3e",
+"assets/AssetManifest.json": "27b42227e203234a96b721fdc1a0f84a",
+"assets/NOTICES": "269a0fdda076bdddb01b6669d357087c",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "57d849d738900cfd590e9adc7e208250",
+"assets/shaders/ink_sparkle.frag": "f8b80e740d33eb157090be4e995febdf",
+"assets/AssetManifest.smcbin": "41ae86ed129fcdbda54e83e916dc8d3a",
+"assets/fonts/MaterialIcons-Regular.otf": "0447805248597363492dbab0d9b10564",
+"assets/assets/images/immersion_phase_interview_therapist.png": "0985b0a8ceb6e3d4b6f8d054c02c846f",
+"assets/assets/images/immersion_phase_therapist_canvas.png": "51e7864a53829ea31b53f13141f8bf23",
+"assets/assets/images/immersion_phase_example_register.png": "8e629788268b6078797ef521c4313673",
 "assets/assets/images/banner.jpeg": "e5eb9ba78a0e6530f1424139fdd31aca",
 "assets/assets/images/banner_home.png": "f5df05f4b6dc71f31e32eea4282be1c4",
-"assets/assets/images/app_icon_white.png": "0b2900dd866035f68036c2992f178433"
-};
-
+"assets/assets/images/immersion_phase_autistic_view.png": "b138ec29fc973958ff91520aa9b70ec3",
+"assets/assets/images/analysis_phase_requisits.png": "ce7c7a8670cb4841052691cfe8a5ca79",
+"assets/assets/images/analysis_phase_overview.png": "4a98fa50afa82006a1ba81e9a3d72176",
+"assets/assets/images/immersion_phase_interview.png": "43aae6ea7683203e82ec7e73d05672bb",
+"assets/assets/images/immersion_phase_client_canvas.png": "0849fd40221b683d4c28456c216e7150",
+"assets/assets/images/immersion_phase_interview_caregivers.png": "1d0f767c296740db9bd0ad8673dc87ad",
+"assets/assets/images/immersion_phase_learn_context.png": "40bf1afcc1bba4fcd79493bbd2bd8f32",
+"assets/assets/images/proaut_flow.png": "4206dda70c15e0cf02d2c52894cc4987",
+"assets/assets/images/immersion_phase_consolidate_data.png": "848b50aa2c95d8124923b6b880a0fecf",
+"assets/assets/images/banner_top.jpeg": "a97a2f4e928c1bae6cae214a02af254f",
+"assets/assets/images/immersion_phase_elicit_requisits.png": "422448d0e3f95e5624c74049c46da5f8",
+"assets/assets/images/analysis_phase_personaut.png": "31543746decc10c156209d39861923b0",
+"assets/assets/images/immersion_phase_caregivers_canvas.png": "018856b9b4bb433d329c5496ef7ee1ec",
+"assets/assets/images/ideation_phase_trr.png": "559706de90d353d693e87a6dd60788e9",
+"assets/assets/images/analysis_phase_canvas_empathyaut.png": "35c14ea6280a5d8a12713771cbdcf0e9",
+"assets/assets/images/app_icon_white.png": "0b2900dd866035f68036c2992f178433",
+"assets/assets/images/ideation_phase_overview.png": "56279f3307fede38a4b3d4470091783f",
+"assets/assets/images/immersion_phase.png": "4a5a680e16fbe9e40551b50255530be3",
+"assets/assets/images/immersion_phase_steps.png": "740b64df65b16ca5ab150fc24b5f8cbf",
+"assets/assets/images/banner_login.png": "4863f47a52584051b3bb9a56b836b3c5",
+"canvaskit/skwasm.js": "1df4d741f441fa1a4d10530ced463ef8",
+"canvaskit/skwasm.wasm": "6711032e17bf49924b2b001cef0d3ea3",
+"canvaskit/chromium/canvaskit.js": "8c8392ce4a4364cbb240aa09b5652e05",
+"canvaskit/chromium/canvaskit.wasm": "fc18c3010856029414b70cae1afc5cd9",
+"canvaskit/canvaskit.js": "76f7d822f42397160c5dfc69cbc9b2de",
+"canvaskit/canvaskit.wasm": "f48eaf57cada79163ec6dec7929486ea",
+"canvaskit/skwasm.worker.js": "19659053a277272607529ef87acf9d8a"};
 // The application shell files that are downloaded before a service worker can
 // start.
-const CORE = [
-  "main.dart.js",
+const CORE = ["main.dart.js",
 "index.html",
-"assets/NOTICES",
 "assets/AssetManifest.json",
 "assets/FontManifest.json"];
+
 // During install, the TEMP cache is populated with the application shell files.
 self.addEventListener("install", (event) => {
   self.skipWaiting();
@@ -41,7 +70,6 @@ self.addEventListener("install", (event) => {
     })
   );
 });
-
 // During activate, the cache is populated with the temp files downloaded in
 // install. If this service worker is upgrading from one with a saved
 // MANIFEST, then use this to retain unchanged resource files.
@@ -63,6 +91,8 @@ self.addEventListener("activate", function(event) {
         await caches.delete(TEMP);
         // Save the manifest to make future upgrades efficient.
         await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+        // Claim client to enable caching on first launch
+        self.clients.claim();
         return;
       }
       var oldManifest = await manifest.json();
@@ -88,6 +118,8 @@ self.addEventListener("activate", function(event) {
       await caches.delete(TEMP);
       // Save the manifest to make future upgrades efficient.
       await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+      // Claim client to enable caching on first launch
+      self.clients.claim();
       return;
     } catch (err) {
       // On an unhandled exception the state of the cache cannot be guaranteed.
@@ -98,7 +130,6 @@ self.addEventListener("activate", function(event) {
     }
   }());
 });
-
 // The fetch handler redirects requests for RESOURCE files to the service
 // worker cache.
 self.addEventListener("fetch", (event) => {
@@ -127,16 +158,17 @@ self.addEventListener("fetch", (event) => {
     .then((cache) =>  {
       return cache.match(event.request).then((response) => {
         // Either respond with the cached resource, or perform a fetch and
-        // lazily populate the cache.
+        // lazily populate the cache only if the resource was successfully fetched.
         return response || fetch(event.request).then((response) => {
-          cache.put(event.request, response.clone());
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
           return response;
         });
       })
     })
   );
 });
-
 self.addEventListener('message', (event) => {
   // SkipWaiting can be used to immediately activate a waiting service worker.
   // This will also require a page refresh triggered by the main worker.
@@ -149,7 +181,6 @@ self.addEventListener('message', (event) => {
     return;
   }
 });
-
 // Download offline will check the RESOURCES for all files not in the cache
 // and populate them.
 async function downloadOffline() {
@@ -170,7 +201,6 @@ async function downloadOffline() {
   }
   return contentCache.addAll(resources);
 }
-
 // Attempt to download the resource online before falling back to
 // the offline cache.
 function onlineFirst(event) {
