@@ -6,6 +6,7 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,22 +46,22 @@ class CardListHome extends StatelessWidget {
     return Responsive(children: <Widget>[
       CustomCard(
         icon: Icons.auto_stories,
-        text: "ProAut Tutorial",
+        text: AppLocalizations.of(context)!.proaut_tutorial,
         onPressed: () => Navigator.pushNamed(context, Routes.tutorial),
       ),
       CustomCard(
         icon: Icons.architecture,
-        text: "ProAut Artifacts",
+        text: AppLocalizations.of(context)!.proaut_artifacts,
         onPressed: () {},
       ),
       CustomCard(
           icon: Icons.search,
-          text: "Look For Recomendations",
+          text: AppLocalizations.of(context)!.look_for_recomendations,
           onPressed: () =>
               Navigator.pushNamed(context, Routes.searchRecomendationsPage)),
       CustomCard(
         icon: Icons.playlist_add,
-        text: "New Project",
+        text: AppLocalizations.of(context)!.new_project,
         onPressed: () {},
       ),
     ]);
@@ -85,7 +86,7 @@ class BannerHomePhone extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "The GuideAut",
+                        AppLocalizations.of(context)!.the_guideAut,
                         style: imageHomeTitleTextStyle,
                       ),
                     ),
@@ -95,13 +96,13 @@ class BannerHomePhone extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         ""
-                        'GuideAut was conceived to provide technological support to ProAut, '
-                        'a process to support the development of application interfaces for '
-                        'autistic people. GuideAut contains collaborative system properties, '
-                        'design recommendations for graphical interfaces that make applications '
-                        'more attractive to such an audience, as well as specific characteristics '
-                        'of autistic profiles to help generate empathy between autistics and the '
-                        'development team, through the use of of ProAut artifacts.'
+                        '${AppLocalizations.of(context)!.guideAut_desc_1}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_2}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_3}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_4}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_5}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_6}'
+                        '${AppLocalizations.of(context)!.guideAut_desc_7}'
                         "",
                         style: imageHomeTextStyle,
                       ),
@@ -140,7 +141,7 @@ class BannerHomeTablerOrDesktop extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "The GuideAut",
+                      AppLocalizations.of(context)!.the_guideAut,
                       style: imageHomeTitleTextStyle,
                     ),
                   ),
@@ -153,13 +154,13 @@ class BannerHomeTablerOrDesktop extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       ""
-                      'GuideAut was conceived to provide technological support to ProAut, '
-                      'a process to support the development of application interfaces for '
-                      'autistic people. GuideAut contains collaborative system properties, '
-                      'design recommendations for graphical interfaces that make applications '
-                      'more attractive to such an audience, as well as specific characteristics '
-                      'of autistic profiles to help generate empathy between autistics and the '
-                      'development team, through the use of of ProAut artifacts.'
+                      '${AppLocalizations.of(context)!.guideAut_desc_1}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_2}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_3}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_4}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_5}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_6}'
+                      '${AppLocalizations.of(context)!.guideAut_desc_7}'
                       "",
                       style: imageHomeTextStyle,
                     ),

@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,7 +48,11 @@ dependencies:
   dartz: 
   firebase_storage: 
   image_picker_for_web:
-
+  intl:
+  riverpod:
+  flutter_riverpod:
+  http:
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,6 +71,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/app_icon_white.png
@@ -92,6 +99,8 @@ flutter:
     - assets/images/analysis_phase_canvas_empathyaut.png
     - assets/images/ideation_phase_overview.png
     - assets/images/ideation_phase_trr.png
+    - assets/images/brazil_flag.jpg
+    - assets/images/usa_flag.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

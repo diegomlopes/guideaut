@@ -5,6 +5,7 @@ import 'package:guideaut/common/widgets/clickable.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/theme.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Footer extends StatelessWidget {
   const Footer({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class Footer extends StatelessWidget {
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.home),
                             child: Text(
-                              'HOME',
+                              AppLocalizations.of(context)!.home,
                               style: imageHomeTextStyle,
                             ),
                           ),
@@ -41,7 +42,7 @@ class Footer extends StatelessWidget {
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.tutorial),
                             child: Text(
-                              'PROAUT',
+                              AppLocalizations.of(context)!.proaut,
                               style: imageHomeTextStyle,
                             ),
                           ),
@@ -49,7 +50,7 @@ class Footer extends StatelessWidget {
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.tools),
                             child: Text(
-                              'TOOLS',
+                              AppLocalizations.of(context)!.tools,
                               style: imageHomeTextStyle,
                             ),
                           ),
@@ -57,7 +58,7 @@ class Footer extends StatelessWidget {
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.about),
                             child: Text(
-                              'ABOUT',
+                              AppLocalizations.of(context)!.about,
                               style: imageHomeTextStyle,
                             ),
                           ),
@@ -65,7 +66,7 @@ class Footer extends StatelessWidget {
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.contact),
                             child: Text(
-                              'CONTACT',
+                              AppLocalizations.of(context)!.contact,
                               style: imageHomeTextStyle,
                             ),
                           ),

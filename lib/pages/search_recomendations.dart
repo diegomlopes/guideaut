@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:guideaut/common/widgets/clickable.dart';
+import 'package:guideaut/pages/entities/boyer_moore.dart';
+import 'package:guideaut/pages/search_page_detail.dart';
 import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_ui/responsive_ui.dart';
 
 class SearchRecomendations extends StatefulWidget {
   const SearchRecomendations({Key? key}) : super(key: key);
@@ -12,29 +17,44 @@ class SearchRecomendations extends StatefulWidget {
 }
 
 class _SearchRecomendationsState extends State<SearchRecomendations> {
-  TextEditingController _searchController = TextEditingController();
+  final _searchController = TextEditingController();
   List<DocumentSnapshot> _searchResults = [];
-  int _currentPage = 1;
-  int _totalPages = 1;
+  Map<String, List<DocumentSnapshot>> _searchResultsByCategory = {};
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _searchItems("");
+    });
+  }
 
   void _searchItems(String searchTerm) {
-    print("Entou1 ${searchTerm}");
     FirebaseFirestore.instance
         .collection('recomendations')
-        // .where('title', arrayContains: searchTerm)
-        // .where('title', isLessThan: searchTerm + 'z')
-        // .orderBy('title')
-        // .limit(10)
         .get()
         .then((QuerySnapshot querySnapshot) {
       setState(() {
         _searchResults = getValidDocuments(querySnapshot.docs, searchTerm);
-        _currentPage = 1;
-        _totalPages = querySnapshot.docs.isNotEmpty
-            ? (querySnapshot.docs.length - 1) ~/ 10 + 1
-            : 1;
+        _searchResultsByCategory = getDocumentsByCategory(_searchResults);
       });
     });
+  }
+
+  Map<String, List<DocumentSnapshot>> getDocumentsByCategory(
+      List<DocumentSnapshot> results) {
+    Map<String, List<DocumentSnapshot>> categoryMap = {};
+
+    for (var result in results) {
+      final category = (result['category'] as String).toLowerCase();
+      if (categoryMap.containsKey(category)) {
+        categoryMap[category]?.add(result);
+      } else {
+        categoryMap.putIfAbsent(category, () => [result]);
+      }
+    }
+    return categoryMap;
   }
 
   List<DocumentSnapshot> getValidDocuments(
@@ -42,12 +62,14 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
     List<DocumentSnapshot> validDocuments = [];
 
     for (var doc in documents) {
-      final title = doc['title'];
-      final description = doc['description'];
+      final title = doc['title'] as String;
+      final description = doc['description'] as String;
+      final category = doc['category'] as String;
 
-      final isValid = boyerMooreSearch(title, term).isNotEmpty ||
-          boyerMooreSearch(description, term).isNotEmpty;
-
+      final isValid = BoyerMoore.search(
+              title.toLowerCase(), term.toLowerCase()) ||
+          BoyerMoore.search(description.toLowerCase(), term.toLowerCase()) ||
+          BoyerMoore.search(category.toLowerCase(), term.toLowerCase());
       if (isValid) {
         validDocuments.add(doc);
       }
@@ -56,109 +78,84 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
     return validDocuments;
   }
 
-  List<int> boyerMooreSearch(String text, String pattern) {
-    final int n = text.length;
-    final int m = pattern.length;
-    List<int> occurrences = [];
-
-    // Pré-processamento para criar a tabela de saltos de caracteres
-    Map<String, int> badCharTable = {};
-    for (int i = 0; i < m - 1; i++) {
-      badCharTable[pattern[i]] = m - 1 - i;
-    }
-
-    int i = 0;
-    while (i <= n - m) {
-      int j = m - 1;
-
-      // Comparar o padrão de trás para frente
-      while (j >= 0 && pattern[j] == text[i + j]) {
-        j--;
-      }
-
-      if (j < 0) {
-        // Ocorrência encontrada
-        occurrences.add(i);
-        i += (i + m < n) ? m - badCharTable[text[i + m]]! : 1;
-      } else {
-        // Deslocamento baseado na tabela de saltos de caracteres
-        int shift = badCharTable.containsKey(text[i + j])
-            ? badCharTable[text[i + j]]!
-            : m;
-
-        i += shift;
-      }
-    }
-
-    return occurrences;
-  }
-
-  void _getNextPage() {
-    print("Entou2");
-    if (_currentPage < _totalPages) {
-      FirebaseFirestore.instance
-          .collection('recomendations')
-          .where('title', isGreaterThanOrEqualTo: _searchController.text)
-          // .where('title', isLessThan: _searchController.text + 'z')
-          .startAfter([_searchResults.last['title']])
-          .limit(10)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-            setState(() {
-              _searchResults.addAll(querySnapshot.docs);
-              _currentPage++;
-            });
-          });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            MiddleBar(),
-            MenuTopBar(),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 1000,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TextField(
-                        controller: _searchController,
-                        onChanged: (value) => _searchItems(value),
-                        decoration: InputDecoration(
-                          labelText: 'Search for Recomendatios',
+            const MiddleBar(),
+            const MenuTopBar(),
+            Column(
+              children: [
+                Div(
+                  divison: const Division(colS: 12, colM: 12, colL: 9),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (value) => _searchItems(value),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!
+                            .look_for_recomendations,
+                      ),
+                    ),
+                  ),
+                ),
+                Responsive(
+                  children: _searchResultsByCategory.keys
+                      .map(
+                        (key) => Div(
+                          divison: const Division(colS: 12, colM: 6, colL: 3),
+                          child: Card(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    key.toUpperCase(),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  children: _searchResultsByCategory[key]!
+                                      .map(
+                                        (doc) => Clickable(
+                                          onPressed: () {
+                                            // Navigate to the detail page when an item is tapped
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SearchRecomendationDetail(
+                                                        doc: doc),
+                                              ),
+                                            );
+                                          },
+                                          child: ListTile(
+                                            title: Text(doc['title']),
+                                            subtitle: Text(
+                                              doc['description'],
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: _searchResults.length + 1,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == _searchResults.length) {
-                            return _currentPage < _totalPages
-                                ? TextButton(
-                                    onPressed: _getNextPage,
-                                    child: Text('Load More'),
-                                  )
-                                : Container();
-                          } else {
-                            final doc = _searchResults[index];
-                            return ListTile(
-                              title: Text(doc['title']),
-                              subtitle: Text(doc['description']),
-                              // Adicione aqui ações ou outros widgets para cada item da lista
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                )),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
             Footer(),
           ],
         ),
