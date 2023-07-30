@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:guideaut/features/admin_panel/recomendations/data/datasources/recomendation_firebase_datasource.dart';
 import 'package:guideaut/features/tutorial/presentation/analysis_phase/analysis_phase_page.dart';
 import 'package:guideaut/features/tutorial/presentation/ideation_phase/ideation_phase_page.dart';
 import 'package:guideaut/features/tutorial/presentation/immersion_phase/immersion_phase_page.dart';
@@ -27,9 +26,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  RecomendationFirebaseDatasource().getCategories();
-
-  // AuthFirebaseDatasource().forgotPassword("diego.lopes.developer@gmail.com");
   runApp(const ProviderScope(child: MyApp()));
 }
 

@@ -1,85 +1,86 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guideaut/common/widgets/clickable.dart';
+import 'package:guideaut/core/no_params.dart';
+import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
+import 'package:guideaut/features/recomendations/domain/usecases/get_recomendations.dart';
 import 'package:guideaut/pages/entities/boyer_moore.dart';
 import 'package:guideaut/pages/search_page_detail.dart';
+import 'package:guideaut/providers/recomendations_provider.dart';
 import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:responsive_ui/responsive_ui.dart';
 
-class SearchRecomendations extends StatefulWidget {
+class SearchRecomendations extends ConsumerStatefulWidget {
   const SearchRecomendations({Key? key}) : super(key: key);
 
   @override
-  State<SearchRecomendations> createState() => _SearchRecomendationsState();
+  ConsumerState<SearchRecomendations> createState() =>
+      _SearchRecomendationsState();
 }
 
-class _SearchRecomendationsState extends State<SearchRecomendations> {
+class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
   final _searchController = TextEditingController();
-  List<DocumentSnapshot> _searchResults = [];
-  Map<String, List<DocumentSnapshot>> _searchResultsByCategory = {};
+  String _term = "";
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _searchItems("");
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(recomendationsProvider.notifier).state =
+          await getRecomendations();
+      setItensByCategoryWith("");
     });
   }
 
-  void _searchItems(String searchTerm) {
-    FirebaseFirestore.instance
-        .collection('recomendations')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      setState(() {
-        _searchResults = getValidDocuments(querySnapshot.docs, searchTerm);
-        _searchResultsByCategory = getDocumentsByCategory(_searchResults);
-      });
-    });
+  Future<List<RecomendationEntity>> getRecomendations() async {
+    final useCase = GetRecomendations();
+    final result = await useCase(NoParams());
+
+    if (result.isLeft()) return [];
+
+    return result.getOrElse(() => []);
   }
 
-  Map<String, List<DocumentSnapshot>> getDocumentsByCategory(
-      List<DocumentSnapshot> results) {
-    Map<String, List<DocumentSnapshot>> categoryMap = {};
+  void setItensByCategoryWith(String term) {
+    _term = term;
 
-    for (var result in results) {
-      final category = (result['category'] as String).toLowerCase();
+    final documents = ref.read(recomendationsProvider.notifier).state;
+
+    List<RecomendationEntity> validDocuments = [];
+
+    for (var doc in documents) {
+      final isValid =
+          BoyerMoore.search(doc.title.toLowerCase(), term.toLowerCase()) ||
+              BoyerMoore.search(
+                  doc.description.toLowerCase(), term.toLowerCase()) ||
+              BoyerMoore.search(doc.category.toLowerCase(), term.toLowerCase());
+      if (isValid) {
+        validDocuments.add(doc);
+      }
+    }
+
+    Map<String, List<RecomendationEntity>> categoryMap = {};
+
+    for (var result in validDocuments) {
+      final category = result.category.toLowerCase();
       if (categoryMap.containsKey(category)) {
         categoryMap[category]?.add(result);
       } else {
         categoryMap.putIfAbsent(category, () => [result]);
       }
     }
-    return categoryMap;
-  }
 
-  List<DocumentSnapshot> getValidDocuments(
-      List<DocumentSnapshot> documents, String term) {
-    List<DocumentSnapshot> validDocuments = [];
-
-    for (var doc in documents) {
-      final title = doc['title'] as String;
-      final description = doc['description'] as String;
-      final category = doc['category'] as String;
-
-      final isValid = BoyerMoore.search(
-              title.toLowerCase(), term.toLowerCase()) ||
-          BoyerMoore.search(description.toLowerCase(), term.toLowerCase()) ||
-          BoyerMoore.search(category.toLowerCase(), term.toLowerCase());
-      if (isValid) {
-        validDocuments.add(doc);
-      }
-    }
-
-    return validDocuments;
+    ref.read(searchResultProvider.notifier).state = categoryMap;
   }
 
   @override
   Widget build(BuildContext context) {
+    final searchResult = ref.watch(searchResultProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -94,7 +95,7 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
                     padding: const EdgeInsets.all(16.0),
                     child: TextField(
                       controller: _searchController,
-                      onChanged: (value) => _searchItems(value),
+                      onChanged: (value) => setItensByCategoryWith(value),
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!
                             .look_for_recomendations,
@@ -103,7 +104,7 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
                   ),
                 ),
                 Responsive(
-                  children: _searchResultsByCategory.keys
+                  children: searchResult.keys
                       .map(
                         (key) => Div(
                           divison: const Division(colS: 12, colM: 6, colL: 3),
@@ -121,7 +122,7 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
                                   ),
                                 ),
                                 Column(
-                                  children: _searchResultsByCategory[key]!
+                                  children: searchResult[key]!
                                       .map(
                                         (doc) => Clickable(
                                           onPressed: () {
@@ -133,12 +134,20 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
                                                     SearchRecomendationDetail(
                                                         doc: doc),
                                               ),
-                                            );
+                                            ).then((value) async {
+                                              ref
+                                                      .read(
+                                                          recomendationsProvider
+                                                              .notifier)
+                                                      .state =
+                                                  await getRecomendations();
+                                              setItensByCategoryWith(_term);
+                                            });
                                           },
                                           child: ListTile(
-                                            title: Text(doc['title']),
+                                            title: Text(doc.title),
                                             subtitle: Text(
-                                              doc['description'],
+                                              doc.description,
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
@@ -156,7 +165,7 @@ class _SearchRecomendationsState extends State<SearchRecomendations> {
                 ),
               ],
             ),
-            Footer(),
+            const Footer(),
           ],
         ),
       ),

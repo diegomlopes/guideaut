@@ -14,7 +14,6 @@ class BoyerMoore {
   static List<int> calculateGoodSuffixTable(String pattern) {
     final table = List<int>.filled(pattern.length + 1, 0);
 
-    final suffix = List<int>.filled(pattern.length, 0);
     var lastPrefixPosition = pattern.length;
     for (var i = pattern.length - 1; i >= 0; i--) {
       if (isPrefix(pattern, i + 1)) {
@@ -71,17 +70,5 @@ class BoyerMoore {
     }
 
     return false;
-  }
-}
-
-void main() {
-  final text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-  final pattern = "consectetur";
-
-  final hasOccurrences = BoyerMoore.search(text, pattern);
-  if (hasOccurrences) {
-    print("Ocorrências encontradas!");
-  } else {
-    print("Nenhuma ocorrência encontrada.");
   }
 }

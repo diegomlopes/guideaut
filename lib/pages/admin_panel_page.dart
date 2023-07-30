@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guideaut/common/widgets/custom_card.dart';
 import 'package:guideaut/core/no_params.dart';
 import 'package:guideaut/features/admin_panel/recomendations/presentation/user_recomendations.dart';
 import 'package:guideaut/features/auth/domain/entities/enuns/user_roles.dart';
 import 'package:guideaut/features/auth/domain/entities/user_entity.dart';
 import 'package:guideaut/features/auth/domain/usecases/get_logged_user.dart';
+import 'package:guideaut/features/auth/domain/usecases/signout.dart';
+import 'package:guideaut/providers/user_provider.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/styles.dart';
 import 'package:guideaut/widgets/footer.dart';
@@ -14,14 +17,14 @@ import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
 
-class AdminPanelPage extends StatefulWidget {
+class AdminPanelPage extends ConsumerStatefulWidget {
   const AdminPanelPage({Key? key}) : super(key: key);
 
   @override
-  State<AdminPanelPage> createState() => _AdminPanelPageState();
+  ConsumerState<AdminPanelPage> createState() => _AdminPanelPageState();
 }
 
-class _AdminPanelPageState extends State<AdminPanelPage> {
+class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +43,27 @@ class _AdminPanelPageState extends State<AdminPanelPage> {
                     // color: const Color(0xff1167b1),
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
-                      child: Text(
-                        "Admin Panel",
-                        style: imageHomeTitleTextStyle,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Admin Panel",
+                            style: imageHomeTitleTextStyle,
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              final useCase = SignOut();
+                              final _ = await useCase(NoParams());
+                              ref.read(loggedUserProvider.notifier).state =
+                                  null;
+
+                              Navigator.pushNamed(context, Routes.home);
+                            },
+                            child: const Text(
+                              "Sair",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
