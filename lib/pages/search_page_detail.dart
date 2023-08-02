@@ -149,8 +149,6 @@ class _SearchRecomendationDetailState
 
   Future<void> ratingRecomendation(int? rate) async {
     final loggedUser = ref.read(loggedUserProvider.notifier).state;
-    print(loggedUser);
-    print(rate);
     if (loggedUser != null && rate != null) {
       final useCase = RatingRecomendation();
       final result = await useCase(
