@@ -12,6 +12,7 @@ import 'package:guideaut/pages/home_page.dart';
 import 'package:guideaut/pages/proaut_page.dart';
 import 'package:guideaut/pages/search_recomendations.dart';
 import 'package:guideaut/pages/sign_in_page.dart';
+import 'package:guideaut/pages/sign_up_page.dart';
 import 'package:guideaut/pages/tools_page.dart';
 import 'package:guideaut/pages/tutorial_page.dart';
 import 'package:guideaut/providers/locale_provider.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
             const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(
-            color: const Color(0xFFF5F5F5),
+            color: Colors.blue,
           ),
         ),
         initialRoute: Routes.home,
@@ -77,6 +78,8 @@ class MyApp extends StatelessWidget {
                 return const ToolsPage();
               case Routes.signin:
                 return const SignInPage();
+              case Routes.signup:
+                return const SignUpPage();
               case Routes.about:
                 return const AboutPage();
               case Routes.contact:

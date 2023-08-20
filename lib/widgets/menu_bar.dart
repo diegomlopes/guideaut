@@ -41,72 +41,75 @@ class _MenuSanduicheState extends State<MenuSanduiche> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: IconButton(
-            icon: Icon(!_isMenuOpen ? Icons.menu : Icons.close),
-            onPressed: _toggleMenu,
+    return Container(
+      color: !_isMenuOpen ? Colors.blue : Colors.transparent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: Icon(!_isMenuOpen ? Icons.menu : Icons.close),
+              onPressed: _toggleMenu,
+            ),
           ),
-        ),
-        GestureDetector(
-          onTap: _toggleMenu,
-          child: !_isMenuOpen
-              ? Container()
-              : AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  color: Colors.grey[50],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.home),
-                        style: menuButtonStyle,
-                        child: Text(
-                          AppLocalizations.of(context)!.home,
+          GestureDetector(
+            onTap: _toggleMenu,
+            child: !_isMenuOpen
+                ? Container()
+                : AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    // color: Colors.lightBlue,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.home),
+                          style: menuButtonStyle,
+                          child: Text(
+                            AppLocalizations.of(context)!.home,
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.tutorial),
-                        style: menuButtonStyle,
-                        child: Text(
-                          AppLocalizations.of(context)!.proaut,
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.tutorial),
+                          style: menuButtonStyle,
+                          child: Text(
+                            AppLocalizations.of(context)!.proaut,
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.tools),
-                        style: menuButtonStyle,
-                        child: Text(
-                          AppLocalizations.of(context)!.tools,
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.tools),
+                          style: menuButtonStyle,
+                          child: Text(
+                            AppLocalizations.of(context)!.tools,
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.about),
-                        style: menuButtonStyle,
-                        child: Text(
-                          AppLocalizations.of(context)!.about,
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.about),
+                          style: menuButtonStyle,
+                          child: Text(
+                            AppLocalizations.of(context)!.about,
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.contact),
-                        style: menuButtonStyle,
-                        child: Text(
-                          AppLocalizations.of(context)!.contact,
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.contact),
+                          style: menuButtonStyle,
+                          child: Text(
+                            AppLocalizations.of(context)!.contact,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -119,83 +122,91 @@ class MenuBarForDesktop extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            InkWell(
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
-              onTap: () => Navigator.popUntil(
-                  context, ModalRoute.withName(Navigator.defaultRouteName)),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      "assets/images/app_icon_white.png",
-                      height: 30,
-                    ),
-                  ),
-                  Text("GUIDEAUT",
-                      style: GoogleFonts.montserrat(
-                        color: textPrimary,
-                        fontSize: 30,
-                        letterSpacing: 3,
-                        fontWeight: FontWeight.w500,
-                      )),
-                ],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                alignment: Alignment.centerRight,
-                child: Wrap(
-                  children: <Widget>[
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.home),
-                      style: menuButtonStyle,
-                      child: Text(
-                        AppLocalizations.of(context)!.home,
+        Container(
+          color: Colors.blue,
+          child: Row(
+            children: <Widget>[
+              InkWell(
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () => Navigator.popUntil(
+                    context, ModalRoute.withName(Navigator.defaultRouteName)),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/app_icon_white.png",
+                        height: 30,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.tutorial),
-                      style: menuButtonStyle,
-                      child: Text(
-                        AppLocalizations.of(context)!.proaut,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.tools),
-                      style: menuButtonStyle,
-                      child: Text(
-                        AppLocalizations.of(context)!.tools,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.about),
-                      style: menuButtonStyle,
-                      child: Text(
-                        AppLocalizations.of(context)!.about,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.contact),
-                      style: menuButtonStyle,
-                      child: Text(
-                        AppLocalizations.of(context)!.contact,
-                      ),
-                    ),
+                    Text("GUIDEAUT",
+                        style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 30,
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.w500,
+                        )),
                   ],
                 ),
               ),
-            ),
-          ],
+              Flexible(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Wrap(
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.home),
+                        style: menuButtonStyle,
+                        child: Text(
+                          AppLocalizations.of(context)!.home,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.tutorial),
+                        style: menuButtonStyle,
+                        child: Text(
+                          AppLocalizations.of(context)!.proaut,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.tools),
+                        style: menuButtonStyle,
+                        child: Text(
+                          AppLocalizations.of(context)!.tools,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.about),
+                        style: menuButtonStyle,
+                        child: Text(
+                          AppLocalizations.of(context)!.about,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, Routes.contact),
+                        style: menuButtonStyle,
+                        child: Text(
+                          AppLocalizations.of(context)!.contact,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         Container(
             height: 1,

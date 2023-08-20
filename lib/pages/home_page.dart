@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
       body: SingleChildScrollView(
         child: LayoutBuilder(builder: (context, constraints) {
           return Column(

@@ -1,11 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:guideaut/core/failures.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/category.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/recomendation.dart';
+import 'package:guideaut/features/recomendations/domain/entities/category_entity.dart';
+import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
 
 abstract class RecomendationRepository {
-  Future<Either<Failure, List<Category>>> getCategories();
-  Future<Either<Failure, Category>> addCategory(Category category);
-  Future<Either<Failure, Recomendation>> addRecomendation(
-      Recomendation recomendation);
+  Future<Either<Failure, List<CategoryEntity>>> getCategories();
+  Future<Either<Failure, CategoryEntity>> addCategory(CategoryEntity category);
+  Future<Either<Failure, RecomendationEntity>> addRecomendation(
+      RecomendationEntity recomendation);
+  // Future<Either<Failure, void>> removeRecomendation(
+  //     RecomendationEntity recomendation);
 }

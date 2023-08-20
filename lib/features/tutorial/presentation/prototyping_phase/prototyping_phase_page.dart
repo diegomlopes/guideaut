@@ -6,6 +6,7 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrototypingPhasePage extends StatefulWidget {
   const PrototypingPhasePage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _PrototypingPhasePageState extends State<PrototypingPhasePage> {
             const MiddleBar(),
             const MenuTopBar(),
             Text(
-              "Prototyping Phase",
+              AppLocalizations.of(context)!.prototyping_phase,
               style: imageHomeTitleTextStyle,
             ),
             Responsive(
@@ -36,34 +37,24 @@ class _PrototypingPhasePageState extends State<PrototypingPhasePage> {
                   child: Column(
                     children: [
                       FullCard(
-                        text: ""
-                            'Prototyping this is the step in which the 1st version of the prototype should effectively be developed. To do so, the development team (designers/developers) must adopt the interactions and requirements contained in the lists of requirements/restrictions. In addition to the elements contained in this list, the team can also consult GuideAut for any suggestions on some characteristics to be observed in relation to the elements. For example, regarding colors and geometric shapes. The result of this step consists of a prototype to be evaluated in the next step.'
-                            "",
+                        text: AppLocalizations.of(context)!.prototyping1,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'Suggested Procedures:'
-                            "",
+                        text: AppLocalizations.of(context)!.prototyping2,
                         textStyle: imageHomeSubTitleTextStyle,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'Make the prototype based mainly on 6 and 7 (main interface elements and complementary interface elements respectively).'
-                            "",
+                        text: AppLocalizations.of(context)!.prototyping3,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'After manufacturing, the prototype is evaluated. To do so, the team will be able to use techniques already consolidated in the area of Software Engineering. However, it suggests some items to be observed regarding the user. For example, check who will be the main application user. Whether the specialist will be the parents or the autistic. Depending on who will be the main user, traditional techniques must be observed for each type of user. If you are autistic, search, for example, on GuideAut for some suggestions for carrying out the assessment.'
-                            "",
+                        text: AppLocalizations.of(context)!.prototyping4,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'Ao final desta etapa, a eeuipe deve considerar e avaliar todas as sugestões de melhoria, refinar o protótipo e reavaliar até que esteja em uma versão satisfatória. Em seguida, o protótipo poderá estar disponível para desenvolvimento da aplicação em si.'
-                            "",
+                        text: AppLocalizations.of(context)!.prototyping5,
                         onPressed: () {},
                       ),
                     ],
@@ -75,23 +66,23 @@ class _PrototypingPhasePageState extends State<PrototypingPhasePage> {
                   child: Row(
                     children: [
                       Text(
-                        "See too:",
+                        AppLocalizations.of(context)!.see_to,
                         style: imageHomeSubTitleTextStyle,
                       ),
                       FullCard(
-                        text: "Immersion Phase",
+                        text: AppLocalizations.of(context)!.immersion_phase,
                         textStyle: textLinkStyle,
                         onPressed: () => Navigator.pushNamed(
                             context, Routes.imersionPhasePage),
                       ),
                       FullCard(
-                        text: "Analysis Phase",
+                        text: AppLocalizations.of(context)!.analysis_phase,
                         textStyle: textLinkStyle,
                         onPressed: () => Navigator.pushNamed(
                             context, Routes.analysisPhasePage),
                       ),
                       FullCard(
-                        text: "Ideation Phase",
+                        text: AppLocalizations.of(context)!.ideation_phase,
                         textStyle: textLinkStyle,
                         onPressed: () => Navigator.pushNamed(
                             context, Routes.ideationPhasePage),
@@ -106,6 +97,5 @@ class _PrototypingPhasePageState extends State<PrototypingPhasePage> {
         ),
       ),
     );
-    ;
   }
 }

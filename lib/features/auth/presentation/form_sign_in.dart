@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_form/flutter_auto_form.dart';
+import 'package:guideaut/common/widgets/clickable.dart';
 import 'package:guideaut/features/auth/domain/usecases/signin.dart';
 import 'package:guideaut/features/auth/presentation/sign_in_template.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/theme.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FormSignIn extends StatefulWidget {
   const FormSignIn({Key? key}) : super(key: key);
@@ -31,15 +33,6 @@ class _FormSignInState extends State<FormSignIn> {
                     "assets/images/banner_login.png",
                     height: 300,
                   ),
-                  // Text(
-                  //   'GUIDEAUT',
-                  //   style: GoogleFonts.montserrat(
-                  //     color: textPrimary,
-                  //     fontSize: 60,
-                  //     letterSpacing: 3,
-                  //     fontWeight: FontWeight.w500,
-                  //   )
-                  // ),
                 ],
               ),
             ),
@@ -47,38 +40,86 @@ class _FormSignInState extends State<FormSignIn> {
           Div(
             divison: const Division(colS: 12, colM: 6, colL: 4),
             child: FormBackground(
-                title: "SIGN IN",
-                child: AFWidget<SignInTemplate>(
-                  handleErrorOnSubmit: print,
-                  formBuilder: () => SignInTemplate(),
-                  submitButton: (Function() submit) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 32),
-                      child: ElevatedButton(
-                        child: const Text('Confirm'),
-                        style: menuButtonStyle,
-                        onPressed: () => submit(),
-                      ),
-                    );
-                  },
-                  onSubmitted: (SignInTemplate form) async {
-                    final usecase = SignIn();
+                title: AppLocalizations.of(context)!.sign_in.toUpperCase(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: 260,
+                      child: AFWidget<SignInTemplate>(
+                        handleErrorOnSubmit: print,
+                        formBuilder: () => SignInTemplate(),
+                        submitButton: (Function() submit) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 32),
+                            child: ElevatedButton(
+                              child:
+                                  Text(AppLocalizations.of(context)!.confirm),
+                              style: menuButtonStyle,
+                              onPressed: () => submit(),
+                            ),
+                          );
+                        },
+                        onSubmitted: (SignInTemplate form) async {
+                          final usecase = SignIn();
 
-                    final result = await usecase(
-                      SignInParams(
-                        email: form.get("email"),
-                        password: form.get("password"),
-                      ),
-                    );
+                          final result = await usecase(
+                            SignInParams(
+                              email: form.get("email"),
+                              password: form.get("password"),
+                            ),
+                          );
 
-                    if (result.isRight()) {
-                      await Navigator.pushNamed(context, Routes.adminPanelPage);
-                    }
-                  },
+                          if (result.isRight()) {
+                            await Navigator.pushNamed(
+                                context, Routes.adminPanelPage);
+                          } else {
+                            await showPopupUserNotFound();
+                          }
+                        },
+                      ),
+                    ),
+                    Clickable(
+                      onPressed: () async =>
+                          await Navigator.pushNamed(context, Routes.signup),
+                      child: Text(
+                        AppLocalizations.of(context)!.new_user_register,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Clickable(
+                      onPressed: () => null,
+                      child: Text(
+                        AppLocalizations.of(context)!.forgot_password,
+                      ),
+                    ),
+                  ],
                 )),
           ),
         ]),
       ),
+    );
+  }
+
+  Future<void> showPopupUserNotFound() async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.user_not_found),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

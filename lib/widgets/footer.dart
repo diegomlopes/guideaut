@@ -3,7 +3,6 @@ import 'package:footer/footer.dart' as footer;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:guideaut/common/widgets/clickable.dart';
 import 'package:guideaut/routes/routes.dart';
-import 'package:guideaut/theme/theme.dart';
 import 'package:responsive_ui/responsive_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,6 +15,7 @@ class Footer extends StatelessWidget {
       margin: const EdgeInsets.only(top: 16),
       height: 400,
       child: footer.Footer(
+        backgroundColor: Colors.blue[700],
         padding: const EdgeInsets.all(16.0),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,23 +35,39 @@ class Footer extends StatelessWidget {
                                 Navigator.pushNamed(context, Routes.home),
                             child: Text(
                               AppLocalizations.of(context)!.home,
-                              style: imageHomeTextStyle,
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  // letterSpacing: 1,
+                                ),
+                              ),
                             ),
                           ),
                           Clickable(
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.tutorial),
-                            child: Text(
-                              AppLocalizations.of(context)!.proaut,
-                              style: imageHomeTextStyle,
-                            ),
+                            child: Text(AppLocalizations.of(context)!.proaut,
+                                style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    // letterSpacing: 1,
+                                  ),
+                                )),
                           ),
                           Clickable(
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.tools),
                             child: Text(
                               AppLocalizations.of(context)!.tools,
-                              style: imageHomeTextStyle,
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  // letterSpacing: 1,
+                                ),
+                              ),
                             ),
                           ),
                           Clickable(
@@ -59,16 +75,26 @@ class Footer extends StatelessWidget {
                                 Navigator.pushNamed(context, Routes.about),
                             child: Text(
                               AppLocalizations.of(context)!.about,
-                              style: imageHomeTextStyle,
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  // letterSpacing: 1,
+                                ),
+                              ),
                             ),
                           ),
                           Clickable(
                             onPressed: () =>
                                 Navigator.pushNamed(context, Routes.contact),
-                            child: Text(
-                              AppLocalizations.of(context)!.contact,
-                              style: imageHomeTextStyle,
-                            ),
+                            child: Text(AppLocalizations.of(context)!.contact,
+                                style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    // letterSpacing: 1,
+                                  ),
+                                )),
                           ),
                         ],
                       ),
@@ -83,31 +109,71 @@ class Footer extends StatelessWidget {
                         children: [
                           Text(
                             'Universidade do Estado do Amazonas',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
                           Text(
                             'Escola Superior de Tecnologia',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
-                          Text(
-                            'Av. Darcy Vargas, 1.200',
-                            style: imageHomeTextStyle,
-                          ),
+                          Text('Av. Darcy Vargas, 1.200',
+                              style: GoogleFonts.montserrat(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  // letterSpacing: 1,
+                                ),
+                              )),
                           Text(
                             'Parque Dez de Novembro',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
                           Text(
                             'Manaus - AM',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
                           Text(
                             '69050-020',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
                           Text(
                             '(92) 3348-7601',
-                            style: imageHomeTextStyle,
+                            style: GoogleFonts.montserrat(
+                              textStyle: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
+                                // letterSpacing: 1,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -129,7 +195,7 @@ class Footer extends StatelessWidget {
                           ),
                           Text('GUIDEAUT',
                               style: GoogleFonts.montserrat(
-                                color: textPrimary,
+                                color: Colors.white,
                                 fontSize: 30,
                                 letterSpacing: 3,
                                 fontWeight: FontWeight.w500,
@@ -140,7 +206,13 @@ class Footer extends StatelessWidget {
               ]),
               Text(
                 'Copyright ©2022, All Rights Reserved.',
-                style: imageHomeTextStyle,
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    // letterSpacing: 1,
+                  ),
+                ),
               ),
             ]),
       ),

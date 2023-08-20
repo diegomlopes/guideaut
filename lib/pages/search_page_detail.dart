@@ -160,7 +160,9 @@ class _SearchRecomendationDetailState
           ),
         ),
       );
+      // ignore: unused_result
       ref.refresh(recomendationsProvider);
+      // ignore: unused_result
       ref.refresh(searchResultProvider);
 
       if (result.isRight()) {

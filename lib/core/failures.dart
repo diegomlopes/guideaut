@@ -8,6 +8,8 @@ class EmailAlreadyExists extends Failure {}
 
 class WeakPassword extends Failure {}
 
+class ConfirmPasswordIsNotEqualsToPassword extends Failure {}
+
 class UserNotFound extends Failure {}
 
 class WrongPassword extends Failure {}
@@ -18,7 +20,7 @@ extension FunctionalFuture<T> on Future<T> {
   Future<Either<Failure, T>> asEitherFailure() async {
     try {
       return Right(await this);
-      // ignore: avoid_catches_without_on_clauses
+      // ignore: avoid_catches_without_on_clauses, unused_catch_stack
     } catch (err, stack) {
       return Left(err is Failure ? err : UnknownFailure());
     }

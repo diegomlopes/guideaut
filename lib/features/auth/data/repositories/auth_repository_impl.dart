@@ -13,9 +13,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, void>> createUser(
-      String email, String password) async {
+      String firstName, String lastName, String email, String password) async {
     return await firebaseDatasource
-        .createUser(email, password, UserRoles.user)
+        .createUser(firstName, lastName, email, password, UserRoles.user)
         .asEither();
   }
 

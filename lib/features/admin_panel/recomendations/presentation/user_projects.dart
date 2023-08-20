@@ -5,14 +5,14 @@ import 'package:guideaut/features/admin_panel/recomendations/presentation/add_us
 import 'package:guideaut/features/auth/domain/entities/user_entity.dart';
 import 'package:guideaut/features/auth/domain/usecases/get_logged_user.dart';
 
-class UserRecomendations extends StatefulWidget {
-  const UserRecomendations({Key? key}) : super(key: key);
+class UserProjects extends StatefulWidget {
+  const UserProjects({Key? key}) : super(key: key);
 
   @override
-  State<UserRecomendations> createState() => _UserRecomendationsState();
+  State<UserProjects> createState() => _UserProjectsState();
 }
 
-class _UserRecomendationsState extends State<UserRecomendations> {
+class _UserProjectsState extends State<UserProjects> {
   final int itemsPerPage = 10;
   int currentPage = 0;
   QuerySnapshot? snapshot;
@@ -68,7 +68,7 @@ class _UserRecomendationsState extends State<UserRecomendations> {
           header: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('User Recomendations'),
+              const Text('User Projects'),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () => showPopupNewRecomendation(),

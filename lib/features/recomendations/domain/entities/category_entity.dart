@@ -1,5 +1,5 @@
-class Category {
-  Category({
+class CategoryEntity {
+  CategoryEntity({
     required this.value,
     required this.text,
   });
@@ -7,8 +7,8 @@ class Category {
   final String value;
   final String text;
 
-  static Category fromJson(Map json) {
-    return Category(
+  static CategoryEntity fromJson(Map json) {
+    return CategoryEntity(
       value: json["value"],
       text: json["text"],
     );

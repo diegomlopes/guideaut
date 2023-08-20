@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/category.dart';
+import 'package:guideaut/features/recomendations/domain/entities/category_entity.dart';
+import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
 
 class RecomendationFirebaseDatasource {
-  Future<List<Category>> getCategories() async {
+  Future<List<CategoryEntity>> getCategories() async {
     final categoriesRef = FirebaseFirestore.instance.collection('categories');
     final categoriesDoc = await categoriesRef.get();
 
-    List<Category> categories = [];
+    List<CategoryEntity> categories = [];
 
     categoriesDoc.docs.forEach((categoryJson) {
-      categories.add(Category.fromJson(categoryJson.data()));
+      categories.add(CategoryEntity.fromJson(categoryJson.data()));
     });
     // if (userDoc.data() != null) {
     //   final data = userDoc.data();
@@ -23,4 +24,15 @@ class RecomendationFirebaseDatasource {
     // }
     return categories;
   }
+
+  Future<void> removeRecomendation(RecomendationEntity recomendation) async {}
+
+  // Future<List<RecomendationEntity>> getUserRecomendations(
+  //     UserEntity user) async {
+  //   final result = await FirebaseFirestore.instance
+  //       .collection('recomendations')
+  //       .where('userId', isEqualTo: (user.id))
+  //       .get();
+
+  // }
 }

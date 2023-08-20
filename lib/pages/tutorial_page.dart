@@ -7,6 +7,7 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorialPage extends StatefulWidget {
   const TutorialPage({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _TutorialPageState extends State<TutorialPage> {
             const MiddleBar(),
             const MenuTopBar(),
             Text(
-              "The ProAut",
+              AppLocalizations.of(context)!.the_proaut,
               style: imageHomeTitleTextStyle,
             ),
             Responsive(
@@ -37,41 +38,19 @@ class _TutorialPageState extends State<TutorialPage> {
                   child: Column(
                     children: [
                       FullCard(
-                        text: ""
-                            'ProAut is a process designed to support Application Interface '
-                            'projects for autistic people. Its focus is mainly lay designers '
-                            'and/or developers'
-                            "",
+                        text: AppLocalizations.of(context)!.tutorial1,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'ProAut is responsible for 4 Steps (as shown below) motivated '
-                            'by Design Thinking: Immersion, Analysis, Ideation and '
-                            'Prototyping;'
-                            "",
+                        text: AppLocalizations.of(context)!.tutorial2,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'Each stage has activities and generates a set of sanitary '
-                            'valves that serve as inputs for the subsequent stage;'
-                            "",
+                        text: AppLocalizations.of(context)!.tutorial3,
                         onPressed: () {},
                       ),
                       FullCard(
-                        text: ""
-                            'ProAut does not claim to support interface design per se. '
-                            'Its stages and respective activities are exclusively '
-                            'proposed to assist in conducting the process of creating '
-                            'interfaces, providing techniques for carrying out these '
-                            'activities, in order to provide, for example, the understanding '
-                            'of the autism theme (desk research), the survey of requirements '
-                            '(interviews), the generation of empathy with autistic people '
-                            '(PersonAut and EmpathyAut), as well as the details of the '
-                            'scenarios that will allow the design of the interface '
-                            '(list of requirements and scenarios).'
-                            "",
+                        text: AppLocalizations.of(context)!.tutorial4,
                         onPressed: () {},
                       ),
                     ],
@@ -95,7 +74,7 @@ class _TutorialPageState extends State<TutorialPage> {
                   child: FullCard(
                     icon: Icons.auto_stories,
                     alignment: CrossAxisAlignment.center,
-                    text: "Immersion Phase",
+                    text: AppLocalizations.of(context)!.immersion_phase,
                     onPressed: () =>
                         Navigator.pushNamed(context, Routes.imersionPhasePage),
                   ),
@@ -103,9 +82,9 @@ class _TutorialPageState extends State<TutorialPage> {
                 Div(
                   divison: const Division(colS: 12, colM: 6, colL: 5, colXL: 5),
                   child: FullCard(
-                    icon: Icons.auto_stories,
+                    icon: Icons.analytics,
                     alignment: CrossAxisAlignment.center,
-                    text: "Analysis Phase",
+                    text: AppLocalizations.of(context)!.analysis_phase,
                     onPressed: () =>
                         Navigator.pushNamed(context, Routes.analysisPhasePage),
                   ),
@@ -113,9 +92,9 @@ class _TutorialPageState extends State<TutorialPage> {
                 Div(
                   divison: const Division(colS: 12, colM: 6, colL: 5, colXL: 5),
                   child: FullCard(
-                    icon: Icons.auto_stories,
+                    icon: Icons.border_color,
                     alignment: CrossAxisAlignment.center,
-                    text: "Ideation Phase",
+                    text: AppLocalizations.of(context)!.ideation_phase,
                     onPressed: () =>
                         Navigator.pushNamed(context, Routes.ideationPhasePage),
                   ),
@@ -123,9 +102,9 @@ class _TutorialPageState extends State<TutorialPage> {
                 Div(
                   divison: const Division(colS: 12, colM: 6, colL: 5, colXL: 5),
                   child: FullCard(
-                    icon: Icons.auto_stories,
+                    icon: Icons.newspaper,
                     alignment: CrossAxisAlignment.center,
-                    text: "Prototyping Phase",
+                    text: AppLocalizations.of(context)!.prototyping_phase,
                     onPressed: () => Navigator.pushNamed(
                         context, Routes.prototypingPhasePage),
                   ),

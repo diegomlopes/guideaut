@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guideaut/common/widgets/custom_card.dart';
 import 'package:guideaut/core/no_params.dart';
+import 'package:guideaut/features/admin_panel/recomendations/presentation/providers/option_selected_provider.dart';
+import 'package:guideaut/features/admin_panel/recomendations/presentation/user_projects.dart';
 import 'package:guideaut/features/admin_panel/recomendations/presentation/user_recomendations.dart';
+import 'package:guideaut/features/admin_panel/recomendations/presentation/user_users.dart';
 import 'package:guideaut/features/auth/domain/entities/enuns/user_roles.dart';
 import 'package:guideaut/features/auth/domain/entities/user_entity.dart';
 import 'package:guideaut/features/auth/domain/usecases/get_logged_user.dart';
@@ -27,6 +30,8 @@ class AdminPanelPage extends ConsumerStatefulWidget {
 class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
   @override
   Widget build(BuildContext context) {
+    PanelOptions _optionSelected = ref.watch(optionSelectedProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -93,9 +98,13 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
                                       .map((e) => CustomCard(
                                             icon: e.icon,
                                             text: e.text,
-                                            onPressed: () =>
-                                                Navigator.pushNamed(
-                                                    context, e.route),
+                                            color: _optionSelected == e.option
+                                                ? Colors.lightBlue[200]
+                                                : null,
+                                            onPressed: () => ref
+                                                .read(optionSelectedProvider
+                                                    .notifier)
+                                                .state = e.option,
                                           ))
                                       .toList()),
                             );
@@ -109,7 +118,15 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
                 ],
               ),
             ),
-            const UserRecomendations(),
+            _optionSelected == PanelOptions.userRecomendation
+                ? const UserRecomendations()
+                : Container(),
+            _optionSelected == PanelOptions.myProjects
+                ? const UserProjects()
+                : Container(),
+            _optionSelected == PanelOptions.users
+                ? const UserUsers()
+                : Container(),
             const Footer(),
           ],
         ),
@@ -122,17 +139,17 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
       PanelOption(
         icon: Icons.supervised_user_circle,
         text: "Users",
-        route: Routes.about,
+        option: PanelOptions.users,
       ),
       PanelOption(
         icon: Icons.recommend_rounded,
         text: "My Recomendations",
-        route: Routes.about,
+        option: PanelOptions.userRecomendation,
       ),
       PanelOption(
         icon: Icons.playlist_add,
         text: "My Projects",
-        route: Routes.about,
+        option: PanelOptions.myProjects,
       ),
     ];
   }
@@ -142,12 +159,12 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
       PanelOption(
         icon: Icons.recommend_rounded,
         text: "My Recomendations",
-        route: Routes.about,
+        option: PanelOptions.userRecomendation,
       ),
       PanelOption(
         icon: Icons.playlist_add,
         text: "My Projects",
-        route: Routes.about,
+        option: PanelOptions.myProjects,
       ),
     ];
   }
@@ -166,10 +183,12 @@ class PanelOption {
   PanelOption({
     required this.icon,
     required this.text,
-    required this.route,
+    required this.option,
   });
 
   final IconData icon;
   final String text;
-  final String route;
+  final PanelOptions option;
 }
+
+enum PanelOptions { users, userRecomendation, myProjects }

@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:guideaut/theme/colors.dart';
 
 ButtonStyle? menuButtonStyle = TextButton.styleFrom(
-  backgroundColor: Colors.transparent,
+  backgroundColor: Colors.blue,
   onSurface: null,
-  primary: textSecondary,
+  primary: textWhite,
   textStyle: buttonTextStyle,
   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
 );
@@ -29,7 +29,7 @@ ButtonStyle? buttonTransparentStyle = TextButton.styleFrom(
 TextStyle buttonTextStyle = GoogleFonts.montserrat(
   textStyle: const TextStyle(
     fontSize: 14,
-    color: textPrimary,
+    color: Colors.white,
     letterSpacing: 1,
   ),
 );

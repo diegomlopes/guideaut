@@ -6,6 +6,7 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({Key? key}) : super(key: key);
@@ -132,12 +133,22 @@ class _ContactPageState extends State<ContactPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              Text(
+                                AppLocalizations.of(context)!.enter_contact,
+                                style: imageHomeTitleTextStyle,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
                               TextFormField(
-                                decoration:
-                                    const InputDecoration(labelText: 'Nome'),
+                                decoration: InputDecoration(
+                                    labelText:
+                                        AppLocalizations.of(context)!.name),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Digite seu nome';
+                                    return AppLocalizations.of(context)!
+                                        .enter_name;
                                   }
                                   return null;
                                 },
@@ -147,12 +158,13 @@ class _ContactPageState extends State<ContactPage> {
                               ),
                               const SizedBox(height: 16),
                               TextFormField(
-                                decoration:
-                                    const InputDecoration(labelText: 'Email'),
+                                decoration: InputDecoration(
+                                    labelText:
+                                        AppLocalizations.of(context)!.email),
                                 keyboardType: TextInputType.emailAddress,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Digite seu email';
+                                    return AppLocalizations.of(context)!.email;
                                   }
                                   return null;
                                 },
@@ -162,12 +174,14 @@ class _ContactPageState extends State<ContactPage> {
                               ),
                               const SizedBox(height: 16),
                               TextFormField(
-                                decoration: const InputDecoration(
-                                    labelText: 'Mensagem'),
+                                decoration: InputDecoration(
+                                    labelText:
+                                        AppLocalizations.of(context)!.message),
                                 maxLines: 5,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Digite sua mensagem';
+                                    return AppLocalizations.of(context)!
+                                        .enter_message;
                                   }
                                   return null;
                                 },
@@ -179,7 +193,7 @@ class _ContactPageState extends State<ContactPage> {
                               ElevatedButton(
                                 onPressed: _submitForm,
                                 style: menuButtonStyle,
-                                child: const Text('Enviar'),
+                                child: Text(AppLocalizations.of(context)!.send),
                               ),
                             ],
                           ),

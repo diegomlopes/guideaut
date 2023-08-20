@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guideaut/core/no_params.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/category.dart';
+import 'package:guideaut/features/recomendations/domain/entities/category_entity.dart';
 import 'package:guideaut/features/admin_panel/recomendations/domain/usecases/add_category.dart';
 import 'package:guideaut/features/admin_panel/recomendations/domain/usecases/get_categories.dart';
 
@@ -15,7 +15,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
 
-  Future<List<Category>> _loadCategories() async {
+  Future<List<CategoryEntity>> _loadCategories() async {
     final getCategories = GetCategories();
 
     final categoriesResult = await getCategories(NoParams());
@@ -62,7 +62,7 @@ class _AddCategoryPopupState extends State<AddCategoryPopup> {
             final useCase = AddCategory();
             await useCase(
               AddCategoryParams(
-                category: Category(
+                category: CategoryEntity(
                     value: _nameController.text.toLowerCase(),
                     text: _nameController.text),
               ),

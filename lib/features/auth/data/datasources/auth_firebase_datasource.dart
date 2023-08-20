@@ -72,7 +72,8 @@ class AuthFirebaseDatasource {
     }
   }
 
-  Future<void> createUser(String email, String password, UserRoles role) async {
+  Future<void> createUser(String firstName, String lastName, String email,
+      String password, UserRoles role) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -86,6 +87,8 @@ class AuthFirebaseDatasource {
             .doc(credential.user?.uid);
         await userRef.set({
           'email': email,
+          "firstName": firstName,
+          "lastName": lastName,
           'role': 'user', // Assign default role
         });
       }

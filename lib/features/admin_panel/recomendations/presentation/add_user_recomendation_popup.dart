@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:guideaut/core/no_params.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/category.dart';
-import 'package:guideaut/features/admin_panel/recomendations/domain/entities/recomendation.dart';
+import 'package:guideaut/features/recomendations/domain/entities/category_entity.dart';
 import 'package:guideaut/features/admin_panel/recomendations/domain/usecases/add_recomendation.dart';
 import 'package:guideaut/features/admin_panel/recomendations/domain/usecases/get_categories.dart';
 import 'package:guideaut/features/admin_panel/recomendations/presentation/add_category_popup.dart';
 import 'package:guideaut/features/auth/domain/entities/user_entity.dart';
 import 'package:guideaut/features/auth/domain/usecases/get_logged_user.dart';
+import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
 import 'package:guideaut/theme/theme.dart';
 
 class AddUserRecomendationPopup extends StatefulWidget {
@@ -23,7 +23,7 @@ class _AddUserRecomendationPopupState extends State<AddUserRecomendationPopup> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
-  Future<List<Category>> _loadCategories() async {
+  Future<List<CategoryEntity>> _loadCategories() async {
     final getCategories = GetCategories();
 
     final categoriesResult = await getCategories(NoParams());
@@ -44,7 +44,7 @@ class _AddUserRecomendationPopupState extends State<AddUserRecomendationPopup> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Done'),
-      content: FutureBuilder<List<Category>>(
+      content: FutureBuilder<List<CategoryEntity>>(
         future: _loadCategories(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,7 +54,7 @@ class _AddUserRecomendationPopupState extends State<AddUserRecomendationPopup> {
           } else if (snapshot.hasError) {
             return const Text('Erro ao carregar as categorias');
           } else {
-            List<Category> categories = snapshot.data!;
+            List<CategoryEntity> categories = snapshot.data!;
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -128,12 +128,13 @@ class _AddUserRecomendationPopupState extends State<AddUserRecomendationPopup> {
             final useCase = AddRecomendation();
             await useCase(
               AddRecomendationParams(
-                recomendation: Recomendation(
-                  title: _titleController.text,
-                  category: _selectedCategory,
-                  description: _descriptionController.text,
-                  userId: (await _userLogged())!.id!,
-                ),
+                recomendation: RecomendationEntity(
+                    id: "",
+                    title: _titleController.text,
+                    category: _selectedCategory,
+                    description: _descriptionController.text,
+                    userId: (await _userLogged())!.id!,
+                    ratings: []),
               ),
             );
             Navigator.of(context).pop();

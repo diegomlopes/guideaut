@@ -1,11 +1,13 @@
 import 'package:flutter_auto_form/flutter_auto_form.dart';
 
 class SignInTemplate extends TemplateForm {
+  SignInTemplate();
+
   @override
   final List<Field> fields = [
     AFTextField(
       id: 'email',
-      name: 'Email',
+      name: "Email",
       validators: [
         MinimumStringLengthValidator(
           5,
