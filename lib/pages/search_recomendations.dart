@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guideaut/common/widgets/clickable.dart';
+import 'package:guideaut/common/widgets/star_rating.dart';
 import 'package:guideaut/core/no_params.dart';
 import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
 import 'package:guideaut/features/recomendations/domain/usecases/get_recomendations.dart';
 import 'package:guideaut/pages/entities/boyer_moore.dart';
-import 'package:guideaut/pages/search_page_detail.dart';
+import 'package:guideaut/pages/entities/clamped_average_calculator.dart';
+import 'package:guideaut/providers/recomendation_selected.dart';
 import 'package:guideaut/providers/recomendations_provider.dart';
+import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
@@ -80,6 +83,14 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
   @override
   Widget build(BuildContext context) {
     final searchResult = ref.watch(searchResultProvider);
+    final String id = ModalRoute.of(context)!.settings.arguments as String;
+
+    searchResult[id]!.sort((a, b) => ClampedAverageCalculator.calculate(
+                a.ratings.map((e) => e.rate).toList()) <
+            ClampedAverageCalculator.calculate(
+                b.ratings.map((e) => e.rate).toList())
+        ? 1
+        : 0);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -89,6 +100,16 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
             const MenuTopBar(),
             Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${AppLocalizations.of(context)!.results_for} ${id.toUpperCase()}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Div(
                   divison: const Division(colS: 12, colM: 12, colL: 9),
                   child: Padding(
@@ -105,59 +126,104 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
                 ),
                 Responsive(
                   children: searchResult.keys
+                      .where((e) => e == id)
                       .map(
                         (key) => Div(
-                          divison: const Division(colS: 12, colM: 6, colL: 3),
-                          child: Card(
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    key.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                          divison: const Division(colS: 12, colM: 12, colL: 8),
+                          child: Column(
+                            children: searchResult[key]!
+                                .map(
+                                  (doc) => Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Clickable(
+                                        onPressed: () {
+                                          ref
+                                              .read(
+                                                  recomendationSelectedProvider
+                                                      .notifier)
+                                              .state = doc;
+
+                                          Navigator.pushNamed(
+                                            context,
+                                            Routes
+                                                .searchRecomendationDetailPage,
+                                            arguments: key,
+                                          ).then((value) async {
+                                            ref
+                                                    .read(recomendationsProvider
+                                                        .notifier)
+                                                    .state =
+                                                await getRecomendations();
+                                            setItensByCategoryWith(_term);
+                                          });
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              Icons.library_books_sharp,
+                                              size: 40,
+                                              color: Colors.black,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: SizedBox(
+                                                width: 200,
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      doc.title,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      doc.description,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            const Spacer(flex: 1),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 6.0, right: 8.0),
+                                              child: Text(
+                                                  "${AppLocalizations.of(context)!.mark}: ${ClampedAverageCalculator.calculate(doc.ratings.map((e) => e.rate).toList()).toInt()}"),
+                                            ),
+                                            StarRating(
+                                              onRating: (rating) {},
+                                              rating: ClampedAverageCalculator
+                                                      .calculate(doc.ratings
+                                                          .map((e) => e.rate)
+                                                          .toList())
+                                                  .toInt(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Column(
-                                  children: searchResult[key]!
-                                      .map(
-                                        (doc) => Clickable(
-                                          onPressed: () {
-                                            // Navigate to the detail page when an item is tapped
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SearchRecomendationDetail(
-                                                        doc: doc),
-                                              ),
-                                            ).then((value) async {
-                                              ref
-                                                      .read(
-                                                          recomendationsProvider
-                                                              .notifier)
-                                                      .state =
-                                                  await getRecomendations();
-                                              setItensByCategoryWith(_term);
-                                            });
-                                          },
-                                          child: ListTile(
-                                            title: Text(doc.title),
-                                            subtitle: Text(
-                                              doc.description,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                      .toList(),
                                 )
-                              ],
-                            ),
+                                .toList(),
                           ),
                         ),
                       )

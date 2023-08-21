@@ -16,6 +16,8 @@ class Routes {
   static const String prototypingPhasePage = "prototyping-phase";
   static const String adminPanelPage = "admin-panel";
   static const String searchRecomendationsPage = "search";
+  static const String searchRecomendationCategoriesPage = "search-categories";
+  static const String searchRecomendationDetailPage = "search-detail";
 
   static Route<T> fadeThrough<T>(RouteSettings settings, WidgetBuilder page,
       {int duration = 300}) {

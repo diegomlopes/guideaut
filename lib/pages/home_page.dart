@@ -58,8 +58,8 @@ class CardListHome extends StatelessWidget {
       CustomCard(
           icon: Icons.search,
           text: AppLocalizations.of(context)!.look_for_recomendations,
-          onPressed: () =>
-              Navigator.pushNamed(context, Routes.searchRecomendationsPage)),
+          onPressed: () => Navigator.pushNamed(
+              context, Routes.searchRecomendationCategoriesPage)),
       CustomCard(
         icon: Icons.playlist_add,
         text: AppLocalizations.of(context)!.new_project,

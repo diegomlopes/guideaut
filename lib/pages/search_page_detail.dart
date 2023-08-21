@@ -10,6 +10,7 @@ import 'package:guideaut/features/recomendations/domain/entities/rating_entity.d
 import 'package:guideaut/features/recomendations/domain/entities/recomendation_entity.dart';
 import 'package:guideaut/features/recomendations/domain/usecases/rating_recomendation.dart';
 import 'package:guideaut/pages/entities/clamped_average_calculator.dart';
+import 'package:guideaut/providers/recomendation_selected.dart';
 import 'package:guideaut/providers/recomendations_provider.dart';
 import 'package:guideaut/providers/user_provider.dart';
 import 'package:guideaut/theme/styles.dart';
@@ -17,12 +18,10 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchRecomendationDetail extends ConsumerStatefulWidget {
-  const SearchRecomendationDetail({required this.doc, Key? key})
-      : super(key: key);
-
-  final RecomendationEntity doc;
+  const SearchRecomendationDetail({Key? key}) : super(key: key);
 
   @override
   ConsumerState<SearchRecomendationDetail> createState() =>
@@ -55,9 +54,16 @@ class _SearchRecomendationDetailState
   Widget build(BuildContext context) {
     final _loggedUser = ref.watch(loggedUserProvider);
     bool _isRating = false;
+    final RecomendationEntity? doc = ref.watch(recomendationSelectedProvider);
+
+    if (doc == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     final average = ClampedAverageCalculator.calculate(
-      widget.doc.ratings.map((e) => e.rate).toList(),
+      doc.ratings.map((e) => e.rate).toList(),
     );
 
     return Scaffold(
@@ -78,7 +84,7 @@ class _SearchRecomendationDetailState
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            widget.doc.title.toUpperCase(),
+                            doc.title.toUpperCase(),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -90,9 +96,11 @@ class _SearchRecomendationDetailState
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             const Spacer(flex: 15),
-                            Text("Avaliações: ${widget.doc.ratings.length}"),
+                            Text(
+                                "${AppLocalizations.of(context)!.ratings}: ${doc.ratings.length}"),
                             const Spacer(flex: 1),
-                            Text("Nota: ${average}"),
+                            Text(
+                                "${AppLocalizations.of(context)!.mark}: ${average.toInt()}"),
                             const Spacer(flex: 1),
                             StarRating(
                               onRating: (rating) => rate = rating,
@@ -106,7 +114,7 @@ class _SearchRecomendationDetailState
                                       setState(() {
                                         _isRating = true;
                                       });
-                                      await ratingRecomendation(rate);
+                                      await ratingRecomendation(rate, doc);
                                       setState(() {
                                         _isRating = false;
                                       });
@@ -125,7 +133,7 @@ class _SearchRecomendationDetailState
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            widget.doc.description,
+                            doc.description,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -147,13 +155,13 @@ class _SearchRecomendationDetailState
     );
   }
 
-  Future<void> ratingRecomendation(int? rate) async {
+  Future<void> ratingRecomendation(int? rate, RecomendationEntity doc) async {
     final loggedUser = ref.read(loggedUserProvider.notifier).state;
     if (loggedUser != null && rate != null) {
       final useCase = RatingRecomendation();
       final result = await useCase(
         RatingParams(
-          recomendation: widget.doc,
+          recomendation: doc,
           rating: RatingEntity(
             rate: rate,
             userId: loggedUser.id!,

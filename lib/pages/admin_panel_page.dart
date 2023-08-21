@@ -19,6 +19,7 @@ import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AdminPanelPage extends ConsumerStatefulWidget {
   const AdminPanelPage({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
                       child: Row(
                         children: [
                           Text(
-                            "Admin Panel",
+                            AppLocalizations.of(context)!.admin_panel,
                             style: imageHomeTitleTextStyle,
                           ),
                           TextButton(
@@ -63,9 +64,9 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
 
                               Navigator.pushNamed(context, Routes.home);
                             },
-                            child: const Text(
-                              "Sair",
-                              style: TextStyle(fontSize: 16),
+                            child: Text(
+                              AppLocalizations.of(context)!.logout,
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ],
@@ -87,7 +88,7 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
                             var options = <PanelOption>[];
 
                             if (user.role == UserRoles.admin) {
-                              options = _adminUserOptions();
+                              options = _adminUserOptions(context);
                             } else {
                               options = _normalUserOptions();
                             }
@@ -134,21 +135,21 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
     );
   }
 
-  List<PanelOption> _adminUserOptions() {
+  List<PanelOption> _adminUserOptions(BuildContext context) {
     return [
       PanelOption(
         icon: Icons.supervised_user_circle,
-        text: "Users",
+        text: AppLocalizations.of(context)!.users,
         option: PanelOptions.users,
       ),
       PanelOption(
         icon: Icons.recommend_rounded,
-        text: "My Recomendations",
+        text: AppLocalizations.of(context)!.my_recomendations,
         option: PanelOptions.userRecomendation,
       ),
       PanelOption(
         icon: Icons.playlist_add,
-        text: "My Projects",
+        text: AppLocalizations.of(context)!.my_projects,
         option: PanelOptions.myProjects,
       ),
     ];
@@ -158,12 +159,12 @@ class _AdminPanelPageState extends ConsumerState<AdminPanelPage> {
     return [
       PanelOption(
         icon: Icons.recommend_rounded,
-        text: "My Recomendations",
+        text: AppLocalizations.of(context)!.my_recomendations,
         option: PanelOptions.userRecomendation,
       ),
       PanelOption(
         icon: Icons.playlist_add,
-        text: "My Projects",
+        text: AppLocalizations.of(context)!.my_projects,
         option: PanelOptions.myProjects,
       ),
     ];

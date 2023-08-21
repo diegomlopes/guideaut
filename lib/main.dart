@@ -10,6 +10,8 @@ import 'package:guideaut/pages/admin_panel_page.dart';
 import 'package:guideaut/pages/contact_page.dart';
 import 'package:guideaut/pages/home_page.dart';
 import 'package:guideaut/pages/proaut_page.dart';
+import 'package:guideaut/pages/search_page_detail.dart';
+import 'package:guideaut/pages/search_recomendation_categories.dart';
 import 'package:guideaut/pages/search_recomendations.dart';
 import 'package:guideaut/pages/sign_in_page.dart';
 import 'package:guideaut/pages/sign_up_page.dart';
@@ -98,6 +100,10 @@ class MyApp extends StatelessWidget {
                 return const AdminPanelPage();
               case Routes.searchRecomendationsPage:
                 return const SearchRecomendations();
+              case Routes.searchRecomendationCategoriesPage:
+                return const SearchRecomendationCategories();
+              case Routes.searchRecomendationDetailPage:
+                return const SearchRecomendationDetail();
               default:
                 return const SizedBox.shrink();
             }

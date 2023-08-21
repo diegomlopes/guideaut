@@ -4,6 +4,7 @@ import 'package:guideaut/core/no_params.dart';
 import 'package:guideaut/features/admin_panel/recomendations/presentation/add_user_recomendation_popup.dart';
 import 'package:guideaut/features/auth/domain/entities/user_entity.dart';
 import 'package:guideaut/features/auth/domain/usecases/get_logged_user.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserRecomendations extends StatefulWidget {
   const UserRecomendations({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class _UserRecomendationsState extends State<UserRecomendations> {
           header: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('User Recomendations'),
+              Text(AppLocalizations.of(context)!.user_recomendations),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () => showPopupNewRecomendation(),
