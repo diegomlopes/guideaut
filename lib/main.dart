@@ -8,6 +8,7 @@ import 'package:guideaut/features/tutorial/presentation/prototyping_phase/protot
 import 'package:guideaut/pages/about_page.dart';
 import 'package:guideaut/pages/admin_panel_page.dart';
 import 'package:guideaut/pages/contact_page.dart';
+import 'package:guideaut/pages/forgot_password_page.dart';
 import 'package:guideaut/pages/home_page.dart';
 import 'package:guideaut/pages/proaut_page.dart';
 import 'package:guideaut/pages/search_page_detail.dart';
@@ -82,6 +83,8 @@ class MyApp extends StatelessWidget {
                 return const SignInPage();
               case Routes.signup:
                 return const SignUpPage();
+              case Routes.forgotPassword:
+                return const ForgotPasswordPage();
               case Routes.about:
                 return const AboutPage();
               case Routes.contact:

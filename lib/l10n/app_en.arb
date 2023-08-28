@@ -57,6 +57,8 @@
     "user_recomendations": "User Recomendations",
     "user_projects": "User Projects",
     "admin_panel": "Admin Panel",
+    "send_email": "SEND EMAIL",
+    "page_in_development": "PAGE UNDER DEVELOPMENT...",
     "tutorial1": "ProAut is a process designed to support Application Interface projects for autistic people. Its focus is mainly lay designers and/or developers",
     "tutorial2": "'ProAut is responsible for 4 Steps (as shown below) motivated by Design Thinking: Immersion, Analysis, Ideation and Prototyping;",
     "tutorial3": "Each stage has activities and generates a set of sanitary valves that serve as inputs for the subsequent stage; ProAut does not claim to support interface design per se. Its stages and respective activities are exclusively proposed to assist in conducting the process of creating interfaces, providing techniques for carrying out these activities, in order to provide, for example, the understanding of the autism theme (desk research), the survey of requirements (interviews), the generation of empathy with autistic people (PersonAut and EmpathyAut), as well as the details of the scenarios that will allow the design of the interface (list of requirements and scenarios).",

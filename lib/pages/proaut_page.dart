@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guideaut/common/widgets/building_widget.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 
@@ -12,12 +13,15 @@ class ProautPage extends StatefulWidget {
 class _ProautPageState extends State<ProautPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: const <Widget>[
-          MiddleBar(),
-          MenuTopBar(),
-        ],
+    return const Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            MiddleBar(),
+            BuildingWidget(),
+            MenuTopBar(),
+          ],
+        ),
       ),
     );
   }

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auto_form/flutter_auto_form.dart';
-import 'package:guideaut/common/widgets/clickable.dart';
-import 'package:guideaut/features/auth/domain/usecases/signin.dart';
-import 'package:guideaut/features/auth/presentation/sign_in_template.dart';
+import 'package:guideaut/features/auth/domain/usecases/forgot_password.dart';
+import 'package:guideaut/features/auth/presentation/forgot_password_template.dart';
 import 'package:guideaut/routes/routes.dart';
 import 'package:guideaut/theme/theme.dart';
 import 'package:responsive_ui/responsive_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FormSignIn extends StatefulWidget {
-  const FormSignIn({Key? key}) : super(key: key);
+class FormForgotPassword extends StatefulWidget {
+  const FormForgotPassword({Key? key}) : super(key: key);
 
   @override
-  State<FormSignIn> createState() => _FormSignInState();
+  State<FormForgotPassword> createState() => _FormForgotPasswordState();
 }
 
-class _FormSignInState extends State<FormSignIn> {
+class _FormForgotPasswordState extends State<FormForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -40,16 +39,16 @@ class _FormSignInState extends State<FormSignIn> {
           Div(
             divison: const Division(colS: 12, colM: 6, colL: 4),
             child: FormBackground(
-                title: AppLocalizations.of(context)!.sign_in.toUpperCase(),
+                title: AppLocalizations.of(context)!.send_email.toUpperCase(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
                       height: 260,
-                      child: AFWidget<SignInTemplate>(
+                      child: AFWidget<ForgotPasswordTemplate>(
                         handleErrorOnSubmit: print,
-                        formBuilder: () => SignInTemplate(),
+                        formBuilder: () => ForgotPasswordTemplate(),
                         submitButton: (Function() submit) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 32),
@@ -61,13 +60,12 @@ class _FormSignInState extends State<FormSignIn> {
                             ),
                           );
                         },
-                        onSubmitted: (SignInTemplate form) async {
-                          final usecase = SignIn();
+                        onSubmitted: (ForgotPasswordTemplate form) async {
+                          final usecase = ForgotPassword();
 
                           final result = await usecase(
-                            SignInParams(
+                            ForgotPasswordParams(
                               email: form.get("email"),
-                              password: form.get("password"),
                             ),
                           );
 
@@ -78,23 +76,6 @@ class _FormSignInState extends State<FormSignIn> {
                             await showPopupUserNotFound();
                           }
                         },
-                      ),
-                    ),
-                    Clickable(
-                      onPressed: () async =>
-                          await Navigator.pushNamed(context, Routes.signup),
-                      child: Text(
-                        AppLocalizations.of(context)!.new_user_register,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Clickable(
-                      onPressed: () async => await Navigator.pushNamed(
-                          context, Routes.forgotPassword),
-                      child: Text(
-                        AppLocalizations.of(context)!.forgot_password,
                       ),
                     ),
                   ],

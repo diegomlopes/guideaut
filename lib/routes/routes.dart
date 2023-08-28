@@ -7,6 +7,7 @@ class Routes {
   static const String tools = "tools";
   static const String signin = "signin";
   static const String signup = "signup";
+  static const String forgotPassword = "forgot-password";
   static const String about = "about";
   static const String contact = "contact";
   static const String tutorial = "tutorial";

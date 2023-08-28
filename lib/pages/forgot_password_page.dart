@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:guideaut/common/widgets/building_widget.dart';
+import 'package:guideaut/features/auth/presentation/form_forgot_password.dart';
 import 'package:guideaut/widgets/footer.dart';
 import 'package:guideaut/widgets/menu_bar.dart';
-import 'package:guideaut/widgets/middle_bar.dart';
 
-class ToolsPage extends StatefulWidget {
-  const ToolsPage({Key? key}) : super(key: key);
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  State<ToolsPage> createState() => _ToolsPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _ToolsPageState extends State<ToolsPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            MiddleBar(),
             MenuTopBar(),
-            BuildingWidget(),
+            FormForgotPassword(),
             Footer(),
           ],
         ),
