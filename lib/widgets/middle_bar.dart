@@ -94,7 +94,7 @@ class _MiddleBarState extends ConsumerState<MiddleBar> {
                             Padding(
                               padding: const EdgeInsets.only(right: 16.0),
                               child: TextButton(
-                                onPressed: () => _loggedUser.isNull
+                                onPressed: () =>(_loggedUser == null)
                                     ? Navigator.pushNamed(
                                         context, Routes.signin)
                                     : Navigator.pushNamed(

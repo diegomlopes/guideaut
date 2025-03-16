@@ -107,7 +107,7 @@ class _SearchRecomendationDetailState
                               rating: average.toInt(),
                             ),
                             const Spacer(flex: 1),
-                            _loggedUser.isNull
+                            (_loggedUser == null)
                                 ? Container()
                                 : ElevatedButton(
                                     onPressed: () async {
