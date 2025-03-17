@@ -60,9 +60,19 @@ class CardListHome extends StatelessWidget {
           text: AppLocalizations.of(context)!.look_for_recomendations,
           onPressed: () => Navigator.pushNamed(
               context, Routes.searchRecomendationCategoriesPage)),
+      // CustomCard(
+      //   icon: Icons.playlist_add,
+      //   text: AppLocalizations.of(context)!.new_project,
+      //   onPressed: () {},
+      // ),
       CustomCard(
-        icon: Icons.playlist_add,
-        text: AppLocalizations.of(context)!.new_project,
+        icon: Icons.cloud_upload_outlined,
+        text: AppLocalizations.of(context)!.repository,
+        onPressed: () {},
+      ),
+      CustomCard(
+        icon: Icons.design_services,
+        text: AppLocalizations.of(context)!.dpaut,
         onPressed: () {},
       ),
     ]);

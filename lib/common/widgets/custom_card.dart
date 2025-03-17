@@ -22,7 +22,7 @@ class CustomCard extends StatelessWidget {
     return Clickable(
       onPressed: () => onPressed(),
       child: Div(
-        divison: const Division(colS: 12, colM: 6, colL: 3),
+        divison: const Division(colS: 12, colM: 6, colL: 2),
         child: Card(
           color: color ?? Colors.blue[700],
           child: Padding(

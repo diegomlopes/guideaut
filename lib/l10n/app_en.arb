@@ -13,6 +13,8 @@
     "proaut_artifacts": "ProAut Artifacts",
     "look_for_recomendations": "Look For Recomendations",
     "new_project": "New Project",
+    "repository": "Repository",
+    "dpaut": "DPAut",
     "guideAut_desc_1": "GuideAut was conceived to provide technological support to ProAut, ",
     "guideAut_desc_2": "a process to support the development of application interfaces for ",
     "guideAut_desc_3": "autistic people. GuideAut contains collaborative system properties, ",
