@@ -11,6 +11,8 @@ class Routes {
   static const String about = "about";
   static const String contact = "contact";
   static const String tutorial = "tutorial";
+  static const String repository = "repository";
+  static const String dpaut = "dpaut";
   static const String imersionPhasePage = "imersion-phase";
   static const String analysisPhasePage = "analysis-phase";
   static const String ideationPhasePage = "ideation-phase";

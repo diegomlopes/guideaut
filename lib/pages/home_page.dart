@@ -7,6 +7,7 @@ import 'package:guideaut/widgets/menu_bar.dart';
 import 'package:guideaut/widgets/middle_bar.dart';
 import 'package:responsive_ui/responsive_ui.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,12 +69,20 @@ class CardListHome extends StatelessWidget {
       CustomCard(
         icon: Icons.cloud_upload_outlined,
         text: AppLocalizations.of(context)!.repository,
-        onPressed: () {},
+        onPressed: () =>
+            Navigator.pushNamed(context, Routes.repository),
       ),
       CustomCard(
         icon: Icons.design_services,
         text: AppLocalizations.of(context)!.dpaut,
-        onPressed: () {},
+        onPressed: () async {
+          const url = 'https://drive.google.com/file/d/1QmeQamG7UCXvllGDwO02XVoddmW0QiFO/view';
+          if (await canLaunch(url)) {
+            await launch(url, forceSafariVC: false, forceWebView: false);
+          } else {
+            throw 'Could not launch $url';
+          }
+        },
       ),
     ]);
   }
