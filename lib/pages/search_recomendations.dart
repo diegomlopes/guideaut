@@ -173,8 +173,11 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: SizedBox(
-                                                width: 200,
+                                                width: 700,
                                                 child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       doc.title,
