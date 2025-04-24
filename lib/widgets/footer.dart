@@ -205,7 +205,7 @@ class Footer extends StatelessWidget {
                     )),
               ]),
               Text(
-                'Copyright ©2022, All Rights Reserved.',
+                'Copyright ©2024, All Rights Reserved.',
                 style: GoogleFonts.montserrat(
                   textStyle: const TextStyle(
                     fontSize: 14,
