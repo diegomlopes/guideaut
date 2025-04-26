@@ -73,7 +73,7 @@ TextStyle imageHomeTitleTextWhiteStyle = GoogleFonts.montserrat(
 
 TextStyle imageHomeTextStyle = GoogleFonts.montserrat(
   textStyle: const TextStyle(
-    fontSize: 14,
+    fontSize: 20,
     color: textPrimary,
     // letterSpacing: 1,
   ),

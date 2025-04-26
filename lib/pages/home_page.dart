@@ -124,7 +124,7 @@ class BannerHomePhone extends StatelessWidget {
                         '${AppLocalizations.of(context)!.guideAut_desc_6}'
                         '${AppLocalizations.of(context)!.guideAut_desc_7}'
                         "",
-                        style: imageHomeTextStyle,
+                        style: imageHomeTextStyle,textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -182,7 +182,7 @@ class BannerHomeTablerOrDesktop extends StatelessWidget {
                       '${AppLocalizations.of(context)!.guideAut_desc_6}'
                       '${AppLocalizations.of(context)!.guideAut_desc_7}'
                       "",
-                      style: imageHomeTextStyle,
+                      style: imageHomeTextStyle, textAlign: TextAlign.center,
                     ),
                   ),
                 ),
