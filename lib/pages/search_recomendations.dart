@@ -185,7 +185,7 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(
-                                                        fontSize: 16,
+                                                        fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -196,7 +196,7 @@ class _SearchRecomendationsState extends ConsumerState<SearchRecomendations> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: const TextStyle(
-                                                        fontSize: 12,
+                                                        fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.normal,
                                                       ),
